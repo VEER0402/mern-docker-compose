@@ -1,40 +1,88 @@
-# A simple MERN stack application 
+# MERN Stack Application using Docker & Docker Compose
 
-### Create a network for the docker containers
+This repository demonstrates how to containerize a complete MERN stack
+application (Frontend, Backend, and MongoDB) using Docker and then orchestrate
+all services using Docker Compose.
 
-`docker network create demo`
+The purpose of this project is to understand real-world DevOps practices such as:
+- Service isolation
+- Container networking
+- Environment-based configuration
+- Transition from manual Docker commands to Docker Compose
 
-### Build the client 
+---
 
-```sh
-cd mern/frontend
-docker build -t mern-frontend .
-```
+## 🧱 Tech Stack
 
-### Run the client
+- Frontend: React (Vite)
+- Backend: Node.js + Express
+- Database: MongoDB
+- Containerization: Docker
+- Orchestration: Docker Compose
 
-`docker run --name=frontend --network=demo -d -p 5173:5173 mern-frontend`
+---
 
-### Verify the client is running
+## 🚀 Phase 1: Manual Docker Setup (Learning Phase)
 
-Open your browser and type `http://localhost:5173`
+Initially, the application was set up using **manual Docker commands** to deeply
+understand Docker fundamentals.
 
-### Run the mongodb container
+### Steps followed:
 
-`docker run --network=demo --name mongodb -d -p 27017:27017 -v ~/opt/data:/data/db mongo:latest`
+1. Created Dockerfile for frontend
+2. Built frontend image and ran container
+3. Created a custom Docker bridge network
+4. Ran MongoDB container on the same network
+5. Created Dockerfile for backend
+6. Built backend image and ran container
+7. Verified communication:
+   - Frontend → Backend
+   - Backend → MongoDB
 
-### Build the server
+### Key learnings:
+- Difference between images and containers
+- Custom Docker networks
+- Container DNS (service-name based communication)
+- Use of environment variables inside containers
 
-```sh
-cd mern/backend
-docker build -t mern-backend .
-```
+---
 
-### Run the server
+## 🧹 Cleanup
 
-`docker run --name=backend --network=demo -d -p 5050:5050 mern-backend`
+After successful testing of the manual setup:
+- All containers were stopped
+- Images and containers were removed
 
-## Using Docker Compose
+This cleanup was done to move towards a cleaner and more maintainable setup.
 
-`docker compose up -d`
+---
 
+## 🚀 Phase 2: Docker Compose Setup
+
+The same MERN stack was then reimplemented using **Docker Compose** to replace
+multiple manual Docker commands with a single declarative configuration.
+
+### Services defined in `docker-compose.yml`:
+
+- **frontend** – React application
+- **backend** – Node.js + Express API
+- **mongodb** – MongoDB database
+
+### Features of Docker Compose setup:
+- Single command startup
+- Shared custom bridge network
+- Service name based communication
+- MongoDB data persistence using Docker volumes
+- Environment variable based configuration
+
+---
+
+## ▶️ How to Run the Application
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Start all services
+```bash
+docker compose up --build

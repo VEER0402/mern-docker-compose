@@ -86,3 +86,44 @@ multiple manual Docker commands with a single declarative configuration.
 ### Start all services
 ```bash
 docker compose up --build
+
+
+
+
+
+
+
+
+
+Access the application
+
+Frontend: http://localhost:5173
+
+Backend API: http://localhost:5050
+
+Stop and clean up
+docker compose down
+
+🧠 Key DevOps Concepts Demonstrated
+
+Dockerfiles define how images are built
+
+Docker Compose defines how services run together
+
+Service names act as DNS hostnames inside Docker networks
+
+Volumes ensure database persistence
+
+Compose simplifies multi-container lifecycle management
+
+🎯 Why Docker Compose?
+
+Docker Compose was used to:
+
+Reduce operational complexity
+
+Improve readability and maintainability
+
+Follow industry-standard container orchestration practices
+
+Prepare the application for CI/CD and production environments
